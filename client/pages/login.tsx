@@ -102,16 +102,14 @@ function RegisterModal({ isRegisterModelOpen, setIsRegisterModelOpen }: ModalPro
             ...data,
             birthDate: birthDateValue ? new Date(birthDateValue as any).toLocaleDateString('en-GB') : '',
         }
+        
+        axios.post('http://localhost:8080/auth/sign-up', form)
+            .then(resp => {
+                console.log(resp);
+            })
+            .catch(resp => {
 
-        console.log(form);
-
-        // axios.post('test', form)
-        //     .then(resp => {
-        //         console.log(resp);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
+            })
     }
 
     const handleBirthDateChange = (newValue: Dayjs | null) => {
@@ -168,8 +166,7 @@ function RegisterModal({ isRegisterModelOpen, setIsRegisterModelOpen }: ModalPro
                     />
                     <br />
                     <DatePicker
-                        // onChange={handleBirthDateChange}
-                        onChange={(e, f) => { console.log(e, f) }}              
+                        onChange={handleBirthDateChange}
                         // {...register('birthDate')}
                         value={birthDateValue}
                         label='birth date'
